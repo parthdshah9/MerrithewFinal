@@ -15,7 +15,7 @@ namespace MerrithewDemo.Controllers
     public class LocationController : Controller
     {
         private MerrithewEntities db = new MerrithewEntities();
-
+        private List<Marker> markers = new List<Marker>();
         public ActionResult List()
         {
             return View();
@@ -23,6 +23,7 @@ namespace MerrithewDemo.Controllers
 
         public ActionResult Map()
         {
+            ImportMarkers();
             var map = new Models.Map()
             {
                 Name = "MyMap",
@@ -32,7 +33,7 @@ namespace MerrithewDemo.Controllers
                 TileUrlTemplate = "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 TileSubdomains = new string[] { "a", "b", "c" },
                 TileAttribution = "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>",
-                Markers = new List<Marker>(177)
+                Markers = markers
                 //{
                 //    new Marker(30.268107, -97.744821, "Austin, TX"),
                 //    new Marker(50.268107, -117.744821, "Hello, ON")
@@ -61,6 +62,14 @@ namespace MerrithewDemo.Controllers
             });
 
             return Json(result);
+        }
+
+        private void ImportMarkers()
+        {
+            foreach (location loc in db.locations)
+            {
+                markers.Add(new Marker(double.Parse(loc.latitude), double.Parse(loc.longitude), loc.name));
+            }
         }
 
         protected override void Dispose(bool disposing)
