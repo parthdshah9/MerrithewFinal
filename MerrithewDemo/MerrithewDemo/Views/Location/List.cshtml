@@ -1,0 +1,32 @@
+﻿
+@(Html.Kendo().Grid<MerrithewDemo.Models.location>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.type_code).Title("Type Code");
+          columns.Bound(c => c.type_desc).Title("Type Description");
+          columns.Bound(c => c.code).Title("Code");
+          columns.Bound(c => c.description).Title("Description");
+          columns.Bound(c => c.name).Title("Name");
+          columns.Bound(c => c.address).Title("Address");
+          columns.Bound(c => c.phone).Title("Contact");
+          columns.Bound(c => c.notes).Title("Notes");
+          columns.Bound(c => c.latitude).Title("Latitude");
+          columns.Bound(c => c.longitude).Title("Longitude");
+      })
+      .HtmlAttributes(new { style = "height: 550px;" })
+      .Pageable()
+      .Navigatable()
+      .Selectable(selectable => {
+          selectable.Mode(GridSelectionMode.Single);
+          selectable.Type(GridSelectionType.Row);
+      })
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("locations_Read", "Location"))
+      )
+)

@@ -162,6 +162,8 @@
     <Compile Include="Models\location.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\Marker.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
