@@ -90,33 +90,32 @@
             }
         }
     </style>
-	<link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.common-material.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.material.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.material.min.css")" rel="stylesheet" type="text/css" />
-	<script src="@Url.Content("~/Scripts/kendo/2017.1.223/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2017.1.223/angular.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2017.1.223/jszip.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2017.1.223/kendo.all.min.js")"></script>
+	<!--This CSS entry was added by the Telerik VS Extensions for compatibility reasons-->
+	<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.dataviz.material.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.1.223/js/angular.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jszip.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.aspnetmvc.min.js"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row k-header">
-            <h1>Project Title</h1>
+            <h1>Merrithew Demo</h1>
             <div id="responsive-panel">
                 <ul id="menu">
-                    <li>Item 1
+                    <li>
+                        <a href="@Url.Action("List", "Location")">Locations List</a>
                     </li>
                     <li>Item 2
                     </li>
                     <li>Item 3
-                    </li>
-                    <li>Item 4
-                    </li>
-                    <li>Item 5
-                    </li>
-                    <li disabled="disabled">Disabled Item
                     </li>
                 </ul>
             </div>

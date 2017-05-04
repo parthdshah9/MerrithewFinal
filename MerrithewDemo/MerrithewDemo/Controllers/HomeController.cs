@@ -12,7 +12,7 @@ namespace MerrithewDemo.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-            SqlImporter.ImportToSql();
+            //SqlImporter.ImportToSql();
             return View();
         }
 
