@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MerrithewDemo.HelperClasses;
 
 namespace MerrithewDemo.Controllers
 {
@@ -11,7 +12,7 @@ namespace MerrithewDemo.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-
+            SqlImporter.ImportToSql();
             return View();
         }
 
