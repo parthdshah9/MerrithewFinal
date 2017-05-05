@@ -31,13 +31,10 @@ namespace MerrithewDemo.Controllers
                 CenterLongitude = -97.744821,
                 Zoom = 3,
                 TileUrlTemplate = "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                TileSubdomains = new string[] { "a", "b", "c" },
+                TileSubdomains = new string[] { "a", "b", "c"},
                 TileAttribution = "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>",
                 Markers = markers
-                //{
-                //    new Marker(30.268107, -97.744821, "Austin, TX"),
-                //    new Marker(50.268107, -117.744821, "Hello, ON")
-                //}
+                
             };
             
             return View(map);

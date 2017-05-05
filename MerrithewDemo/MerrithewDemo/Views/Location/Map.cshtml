@@ -30,6 +30,38 @@
             }
         })
         )
+       
+        <script>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                //SUCCESS
+                function (position) {
+                    alert(
+                    'Success! Coordinates: '
+                    + position.coords.latitude
+                    +
+                    " "
+                    + position.coords.longitude);
+                },
+                //FAIL
+                function (err) {
+                    switch (err.code) {
+                        case
+                        err.PERMISSION_DENIED:
+
+                        case
+                        err.POSITION_UNAVAILABLE:
+
+                        case
+                        err.TIMEOUT:
+
+                        case
+                        err.UNKNOWN_ERROR:
+                            break;
+                    }
+                });
+            }
+        </script>
     </div>
 </body>
 </html>
