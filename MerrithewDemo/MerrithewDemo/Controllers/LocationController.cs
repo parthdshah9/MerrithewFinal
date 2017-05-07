@@ -74,9 +74,6 @@ namespace MerrithewDemo.Controllers
         [HttpPost]
         public JsonResult GetLocation(string latitude, string longitude)
         {
-            //Todo logic
-            //filter the long and lat
-            //crate list of Markers
             var currentCoord = new GeoCoordinate(double.Parse(latitude), double.Parse(longitude));
 
             List<Markers> markersList = new List<Markers>();
