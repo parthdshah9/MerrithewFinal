@@ -1,7 +1,6 @@
 ﻿@model MerrithewDemo.Models.Map
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,28 +8,6 @@
 </head>
 <body>
     <div>
-        @*@(Html.Kendo().Map()
-            .Name(Model.Name)
-            .Center(Model.CenterLatitude, Model.CenterLongitude)
-            .Zoom(Model.Zoom)
-            .Layers(layers => layers
-                .Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate(Model.TileUrlTemplate)
-                .Subdomains(Model.TileSubdomains)
-                .Attribution(Model.TileAttribution)
-            )
-            //.Markers(markers =>
-            //{
-            //    foreach (var marker in Model.Markers)
-            //    {
-            //        markers.Add()
-            //        .Location(marker.latlng)
-            //        .Title(marker.name);
-            //    }
-            //})
-            )*@
-
         <div id="map"></div>
 
         <script>
@@ -39,7 +16,7 @@
                     navigator.geolocation.getCurrentPosition(
                     //SUCCESS
                     function (position) {
-                        console.log(position.coords.latitude + " ~~" + position.coords.longitude);
+                        console.log(position.coords.latitude + " ~~ " + position.coords.longitude);
                         $.ajax({
                             //processing
                             method: "POST",
@@ -89,7 +66,7 @@
                 });
 
                 var markerArray = [];
-                
+
             }
         </script>
     </div>
