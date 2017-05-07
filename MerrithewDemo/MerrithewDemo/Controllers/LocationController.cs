@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MerrithewDemo.Models;
+using MerrithewDemo.HelperClasses;
+using System.Device.Location;
 
 namespace MerrithewDemo.Controllers
 {
@@ -31,12 +33,12 @@ namespace MerrithewDemo.Controllers
                 CenterLongitude = -97.744821,
                 Zoom = 3,
                 TileUrlTemplate = "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                TileSubdomains = new string[] { "a", "b", "c"},
+                TileSubdomains = new string[] { "a", "b", "c" },
                 TileAttribution = "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>",
                 Markers = markers
-                
+
             };
-            
+
             return View(map);
         }
 
@@ -69,6 +71,33 @@ namespace MerrithewDemo.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult GetLocation(string latitude, string longitude)
+        {
+            //Todo logic
+            //filter the long and lat
+            //crate list of Markers
+            var currentCoord = new GeoCoordinate(double.Parse(latitude), double.Parse(longitude));
+
+            List<Markers> markersList = new List<Markers>();
+            foreach (location loc in db.locations)
+            {
+                var storeCoord = new GeoCoordinate(double.Parse(loc.latitude), double.Parse(loc.longitude));
+
+                //Filter the locations which lies in 5 km range.
+                if (currentCoord.GetDistanceTo(storeCoord) <= 5000)
+                {
+                    markersList.Add(new Markers()
+                    {
+                        location = new List<double>() { double.Parse(loc.latitude), double.Parse(loc.longitude) },
+                        shape = "pinTarget",
+                        tooltip = new Tooltips { content = loc.name }
+                    });
+                }
+
+            }
+            return Json(markersList);
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -9,57 +9,87 @@
 </head>
 <body>
     <div>
-        @(Html.Kendo().Map()
-        .Name(Model.Name)
-        .Center(Model.CenterLatitude, Model.CenterLongitude)
-        .Zoom(Model.Zoom)
-        .Layers(layers => layers
-            .Add()
-            .Type(MapLayerType.Tile)
-            .UrlTemplate(Model.TileUrlTemplate)
-            .Subdomains(Model.TileSubdomains)
-            .Attribution(Model.TileAttribution)
-        )
-        .Markers(markers =>
-        {
-            foreach (var marker in Model.Markers)
-            {
-                markers.Add()
-                .Location(marker.latlng)
-                .Title(marker.name);
-            }
-        })
-        )
-       
+        @*@(Html.Kendo().Map()
+            .Name(Model.Name)
+            .Center(Model.CenterLatitude, Model.CenterLongitude)
+            .Zoom(Model.Zoom)
+            .Layers(layers => layers
+                .Add()
+                .Type(MapLayerType.Tile)
+                .UrlTemplate(Model.TileUrlTemplate)
+                .Subdomains(Model.TileSubdomains)
+                .Attribution(Model.TileAttribution)
+            )
+            //.Markers(markers =>
+            //{
+            //    foreach (var marker in Model.Markers)
+            //    {
+            //        markers.Add()
+            //        .Location(marker.latlng)
+            //        .Title(marker.name);
+            //    }
+            //})
+            )*@
+
+        <div id="map"></div>
+
         <script>
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                //SUCCESS
-                function (position) {
-                    alert(
-                    'Success! Coordinates: '
-                    + position.coords.latitude
-                    +
-                    " "
-                    + position.coords.longitude);
-                },
-                //FAIL
-                function (err) {
-                    switch (err.code) {
-                        case
-                        err.PERMISSION_DENIED:
+            $(document).ready(function () {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                    //SUCCESS
+                    function (position) {
+                        console.log(position.coords.latitude + " ~~" + position.coords.longitude);
+                        $.ajax({
+                            //processing
+                            method: "POST",
+                            url: "/Location/GetLocation",
+                            data: { latitude: position.coords.latitude, longitude: position.coords.longitude }
+                        }).done(function (_markerArray) {
+                            //done porceesing
+                            //
+                            console.log(_markerArray);
+                            markerArray = _markerArray;
+                            createMap(position.coords.latitude, position.coords.longitude, _markerArray);
+                            //alert("Data Saved: " + msg);
+                        });
+                    },
+                    //FAIL
+                    function (err) {
+                        switch (err.code) {
+                            case
+                            err.PERMISSION_DENIED:
 
-                        case
-                        err.POSITION_UNAVAILABLE:
+                            case
+                            err.POSITION_UNAVAILABLE:
 
-                        case
-                        err.TIMEOUT:
+                            case
+                            err.TIMEOUT:
 
-                        case
-                        err.UNKNOWN_ERROR:
-                            break;
-                    }
+                            case
+                            err.UNKNOWN_ERROR:
+                                break;
+                        }
+                    });
+                }
+
+
+            });
+            function createMap(latitude, longitude, markerArray) {
+                $("#map").kendoMap({
+                    center: [latitude, longitude],
+                    zoom: 3,
+                    layers: [{
+                        type: "tile",
+                        urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                        subdomains: ["a", "b", "c"],
+                        attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+                    }],
+                    markers: markerArray
                 });
+
+                var markerArray = [];
+                
             }
         </script>
     </div>
